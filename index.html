@@ -1,0 +1,289 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Essência — Juntos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff8f7; /* soft peach */
+      --accent:#ff6b6b; /* joyful coral */
+      --muted:#7b6f6f;
+      --glass: rgba(255,255,255,0.6);
+      --gold: #d9a56d;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      -webkit-tap-highlight-color:transparent;
+    }/* Mobile first container */
+.wrap{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:22px 18px 40px;
+  gap:18px;
+  position:relative;
+}
+
+header{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  display:flex;flex-direction:column;gap:2px;
+}
+.site-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--muted)}
+.site-sub{font-size:11px;color:var(--muted)}
+
+/* Hero */
+.hero{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  margin-top:6px;
+}
+.name{
+  font-family:'Playfair Display',serif;
+  font-size:34px;
+  letter-spacing:0.4px;
+  color:#222;
+  text-align:center;
+  line-height:1;
+}
+.typed{color:var(--accent);font-weight:700}
+
+/* player card */
+.player{
+  width:100%;
+  max-width:480px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  backdrop-filter:blur(6px);
+}
+.cover{
+  width:64px;height:64px;border-radius:10px;flex-shrink:0;background-size:cover;background-position:center;box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+.meta{flex:1}
+.song{font-weight:600}
+.artist{font-size:12px;color:var(--muted);margin-top:4px}
+.playbtn{
+  width:44px;height:44px;border-radius:10px;border:none;background:transparent;display:grid;place-items:center;font-size:18px;cursor:pointer;
+}
+.playbtn.playing{animation:beat 1s infinite}
+@keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+/* slideshow */
+.slideshow{
+  width:100%;max-width:480px;height:320px;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 12px 40px rgba(0,0,0,0.06);
+}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease,transform 1s ease}
+.slide.show{opacity:1;transform:translateY(0)}
+.slide .caption{position:absolute;left:12px;bottom:12px;background:linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.42));padding:8px 10px;border-radius:10px;font-size:13px;color:#222}
+
+/* text card */
+.textcard{width:100%;max-width:480px;padding:16px;border-radius:14px;background:var(--glass);box-shadow:0 8px 26px rgba(0,0,0,0.04);backdrop-filter:blur(6px);}
+.textcard p{margin:0;font-size:15px;line-height:1.45;color:#222}
+
+/* counter */
+.counter{margin-top:6px;font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.count-pill{background:#fff;padding:6px 8px;border-radius:8px;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.04)}
+
+/* particles */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+.particle{position:absolute;border-radius:50%;opacity:0.7}
+
+/* footer */
+footer{margin-top:8px;width:100%;max-width:480px;text-align:center;color:var(--muted);font-size:13px}
+
+/* easter egg */
+.egg{position:fixed;right:14px;bottom:14px;width:46px;height:46px;border-radius:12px;background:var(--gold);display:grid;place-items:center;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,0.12)}
+.secret{position:fixed;left:12px;bottom:80px;background:rgba(255,255,255,0.95);padding:12px 14px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.12);display:none;max-width:320px}
+
+/* small screens tweaks */
+@media(min-width:720px){
+  .wrap{padding:36px;}
+  .name{font-size:48px}
+  .slideshow{height:420px}
+}
+
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  <div class="wrap" id="app">
+    <header>
+      <div class="logo">
+        <div class="site-title">Essência</div>
+        <div class="site-sub">Um pequeno santuário digital</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">Feito pra você ♥</div>
+    </header><main class="hero">
+  <div class="name">Ela é <span class="typed" id="typed">única</span></div>
+
+  <div class="player" id="playerCard">
+    <div class="cover" id="cover" style="background-image:url('https://source.unsplash.com/200x200/?flower,smile')"></div>
+    <div class="meta">
+      <div class="song" id="songTitle">Mergulhei nos seus olhos</div>
+      <div class="artist" id="songArtist">Natiruts</div>
+    </div>
+    <button class="playbtn" id="playBtn">▶</button>
+    <audio id="audio" loop preload="auto" src="mergulheinosteusolhos.mp3"></audio>
+  </div>
+
+  <div class="slideshow" id="slideshow">
+    <!-- slides inserted by JS -->
+  </div>
+
+  <div class="textcard">
+    <p id="dedication">Não sei o porquê de estarmos sempre juntos, ou o que nos torna tão inseparáveis, mas saiba que você é uma das poucas pessoas realmente especiais pra mim. Uma daquelas que o tempo não apaga e a distância não muda. Te amo, e quero você na minha vida, hoje e sempre 💞</p>
+  </div>
+
+  <div class="counter" id="counter">Juntos desde <div class="count-pill" id="sinceDate">01/03/2024</div> • <div class="count-pill" id="timeUp">...</div></div>
+
+  <footer>
+    <div id="finalLine">💯💯💯</div>
+  </footer>
+</main>
+
+<div class="egg" id="egg">✨</div>
+<div class="secret" id="secret">Segredo desbloqueado: Sou muito criativo 🙅🏻</div>
+
+  </div>  <script>
+    /* ======== typed effect ======== */
+    const words = ["intensa","alegre","inesquecível","incrivel","Linda","minha🤫✌🏻" ];
+    let widx=0;let ch=0;let rev=false;
+    const typedEl=document.getElementById('typed');
+    function tick(){
+      const word=words[widx];
+      if(!rev){
+        ch++;
+        typedEl.textContent=word.slice(0,ch);
+        if(ch===word.length){rev=true;setTimeout(tick,1000);return}
+      } else {
+        ch--;
+        typedEl.textContent=word.slice(0,ch);
+        if(ch===0){rev=false;widx=(widx+1)%words.length}
+      }
+      setTimeout(tick, rev?60:120);
+    }
+    tick();
+
+    /* ======== slideshow ======== */
+    const images = [
+      'foto1.jpg',
+      'foto2.jpg',
+      'foto3.jpg',
+      'foto4.jpg',
+      'foto5.jpg',
+      'foto6.jpg'
+    ];
+    const slideshow=document.getElementById('slideshow');
+    images.forEach((src,i)=>{
+      const s=document.createElement('div');
+      s.className='slide';
+      s.style.backgroundImage=`url(${src})`;
+      if(i===0) s.classList.add('show');
+      const cap=document.createElement('div');cap.className='caption';cap.textContent='momentos que guardo';s.appendChild(cap);
+      slideshow.appendChild(s);
+    });
+    let cur=0;const slides=document.querySelectorAll('.slide');
+    setInterval(()=>{
+      slides[cur].classList.remove('show');
+      cur=(cur+1)%slides.length;
+      slides[cur].classList.add('show');
+    },4800);
+
+    /* ======== audio player + autoplay handling ======== */
+    const audio=document.getElementById('audio');
+    const playBtn=document.getElementById('playBtn');
+    const cover=document.getElementById('cover');
+    const playerCard=document.getElementById('playerCard');
+
+    async function tryAutoplay(){
+      try{
+        await audio.play();
+        playBtn.textContent='❚❚';playBtn.classList.add('playing');
+      }catch(e){
+        // autoplay blocked — show a stealth overlay to invite touch
+        showTapToPlay();
+      }
+    }
+    function showTapToPlay(){
+      const overlay=document.createElement('div');
+      overlay.style= 'position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.2));';
+      const btn=document.createElement('button');btn.textContent='Tocar música';btn.style='padding:14px 18px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;';
+      overlay.appendChild(btn);
+      document.body.appendChild(overlay);
+      btn.addEventListener('click',async ()=>{
+        await audio.play();playBtn.textContent='❚❚';playBtn.classList.add('playing');document.body.removeChild(overlay);
+      })
+    }
+    playBtn.addEventListener('click',async ()=>{
+      if(audio.paused){
+        await audio.play();playBtn.textContent='❚❚';playBtn.classList.add('playing');
+      }else{audio.pause();playBtn.textContent='▶';playBtn.classList.remove('playing');}
+    });
+    // try autoplay on load
+    window.addEventListener('load',()=>{ tryAutoplay(); });
+
+    /* ======== counter since date ======== */
+    const since = new Date('2024-03-01T00:00:00');
+    const timeUp = document.getElementById('timeUp');
+    function updateCounter(){
+      const now = new Date();
+      let diff = Math.max(0, Math.floor((now - since)/1000));
+      const days = Math.floor(diff / 86400); diff %= 86400;
+      const hours = Math.floor(diff/3600); diff %=3600;
+      const minutes = Math.floor(diff/60); const seconds = diff%60;
+      timeUp.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    updateCounter();setInterval(updateCounter,1000);
+
+    /* ======== particles (gentle floating) ======== */
+    const particles = document.getElementById('particles');
+    const colors = ['rgba(255,107,107,0.12)','rgba(217,165,109,0.10)','rgba(255,200,200,0.08)'];
+    function makeParticle(){
+      const el=document.createElement('div');el.className='particle';
+      const size = Math.random()*16+6;el.style.width=size+'px';el.style.height=size+'px';
+      el.style.left=(Math.random()*100)+'%';el.style.top=(Math.random()*100)+'%';
+      el.style.background=colors[Math.floor(Math.random()*colors.length)];
+      el.style.transform=`translateY(${(Math.random()*40-20)}px)`;
+      particles.appendChild(el);
+      setTimeout(()=>{el.remove()},7000);
+    }
+    setInterval(makeParticle,450);
+
+    /* ======== easter egg ======== */
+    const egg=document.getElementById('egg');const secret=document.getElementById('secret');
+    egg.addEventListener('click',()=>{ if(secret.style.display==='block'){secret.style.display='none'}else{secret.style.display='block'; setTimeout(()=>secret.style.display='none',6000)} });
+
+    /* ======== small swipe support for slideshow (touch) ======== */
+    let startX=null;slideshow.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX});
+    slideshow.addEventListener('touchend',e=>{const dx = e.changedTouches[0].clientX - startX; if(Math.abs(dx) > 40){slides[cur].classList.remove('show'); if(dx<0){cur=(cur+1)%slides.length}else{cur=(cur-1+slides.length)%slides.length} slides[cur].classList.add('show')}});
+
+    /* ======== quick replace helpers ======== */
+    // To replace images or music: edit the `images` array and the audio.src above.
+
+  </script></body>
+</html>
